@@ -129,7 +129,7 @@ class MultiModalDataset(Dataset):
         # orc: [{'time': 0, 'text': 'THERS39ww.num'}, {'time': 1, 'text': 'IMBAHOLL'}, {'time': 5, 'text': 'NBA CHAMPIONS'}]
         # ocr = self.anns[idx]['ocr']
 
-        title_input, title_mask = self.tokenize_text(title)
+        # title_input, title_mask = self.tokenize_text(title)
         asr_input, asr_mask = self.tokenize_text(asr)
         # ocr_input, ocr_mask = self.tokenize_text(ocr)
 
@@ -137,8 +137,8 @@ class MultiModalDataset(Dataset):
         data = dict(
             frame_input=frame_input,
             frame_mask=frame_mask,
-            title_input=title_input,
-            title_mask=title_mask,
+            # title_input=title_input,
+            # title_mask=title_mask,
             asr_input=asr_input,
             asr_mask=asr_mask,
             # ocr_input=ocr_input,
