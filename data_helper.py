@@ -126,11 +126,12 @@ class MultiModalDataset(Dataset):
         # Step 2, load title tokens
         title = self.anns[idx]['title']  # 14% 空的
         asr = self.anns[idx]['asr']
-        ocr = self.anns[idx]['ocr']
+        # orc: [{'time': 0, 'text': 'THERS39ww.num'}, {'time': 1, 'text': 'IMBAHOLL'}, {'time': 5, 'text': 'NBA CHAMPIONS'}]
+        # ocr = self.anns[idx]['ocr']
 
         title_input, title_mask = self.tokenize_text(title)
         asr_input, asr_mask = self.tokenize_text(asr)
-        ocr_input, ocr_mask = self.tokenize_text(ocr)
+        # ocr_input, ocr_mask = self.tokenize_text(ocr)
 
         # Step 3, summarize into a dictionary
         data = dict(
@@ -140,8 +141,8 @@ class MultiModalDataset(Dataset):
             title_mask=title_mask,
             asr_input=asr_input,
             asr_mask=asr_mask,
-            ocr_input=ocr_input,
-            ocr_mask=ocr_mask
+            # ocr_input=ocr_input,
+            # ocr_mask=ocr_mask
         )
 
         # Step 4, load label if not test mode
