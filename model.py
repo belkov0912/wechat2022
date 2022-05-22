@@ -10,6 +10,7 @@ class MultiModal(nn.Module):
     def __init__(self, args):
         super().__init__()
         self.bert = BertModel.from_pretrained(args.bert_dir, cache_dir=args.bert_cache)
+        self.bert2 = BertModel.from_pretrained(args.bert_dir, cache_dir=args.bert_cache)
         self.nextvlad = NeXtVLAD(args.frame_embedding_size, args.vlad_cluster_size,
                                  output_size=args.vlad_hidden_size, dropout=args.dropout)
         self.enhance = SENet(channels=args.vlad_hidden_size, ratio=args.se_ratio)
@@ -19,7 +20,7 @@ class MultiModal(nn.Module):
 
     def forward(self, inputs, inference=False):
         bert_embedding = self.bert(inputs['title_input'], inputs['title_mask'])['pooler_output']
-        asr_embedding = self.bert(inputs['asr_input'], inputs['asr_mask'])['pooler_output']
+        asr_embedding = self.bert2(inputs['asr_input'], inputs['asr_mask'])['pooler_output']
         # ocr_embedding = self.bert(inputs['ocr_input'], inputs['ocr_mask'])['pooler_output']
 
         vision_embedding = self.nextvlad(inputs['frame_input'], inputs['frame_mask'])
